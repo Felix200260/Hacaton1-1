@@ -1,0 +1,39 @@
+Создание базы данных:
+
+create table users
+(
+    id       int unsigned auto_increment
+        primary key,
+    UserName varchar(32) null
+);
+
+create table debt
+(
+    id        int unsigned auto_increment
+        primary key,
+    debt_user int unsigned null,
+    cred_user int unsigned null,
+    cash      int          null,
+    constraint debt_users_id_fk
+        foreign key (debt_user) references users (id),
+    constraint debt_users_id_fk_2
+        foreign key (cred_user) references users (id)
+);
+
+create index fk1_idx
+    on debt (debt_user, cred_user);
+
+
+Заполнение 1-ой таблицы
+
+INSERT INTO telebot.users (id, UserName) VALUES (1, 'admin');
+INSERT INTO telebot.users (id, UserName) VALUES (2, 'John');
+INSERT INTO telebot.users (id, UserName) VALUES (3, 'Alex');
+
+
+Заполнение 2-ой
+
+INSERT INTO telebot.debt (id, debt_user, cred_user, cash) VALUES (1, 1, 2, 2400);
+INSERT INTO telebot.debt (id, debt_user, cred_user, cash) VALUES (2, 1, 3, 400);
+INSERT INTO telebot.debt (id, debt_user, cred_user, cash) VALUES (3, 2, 3, 11200);
+INSERT INTO telebot.debt (id, debt_user, cred_user, cash) VALUES (36, 2, 1, 543);
